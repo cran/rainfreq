@@ -1,0 +1,33 @@
+\docType{data}
+\name{rain_max_usa}
+\alias{rain_max_usa}
+\title{Record rainfall totals from the USA}
+\format{Data frame with 8 columns and 19 rows}
+\description{
+  USA record point precipitation measurements from NOAA's
+  National Weather Service, Hydrometeorological Design
+  Studies Center. NOAA indicates that some records have not
+  been verified.
+}
+\details{
+  Variables:
+
+  \itemize{ \item Duration - duration of the rainfall event
+  \item Amount_in - total rainfall amount in inches \item
+  Amount_mm - total rainfall amount in millimeters \item
+  Location - region and country names \item Lat - latitude
+  in decimal degrees \item Lon - longitude in decimal
+  degrees \item Start_Date - starting date of the rainfall
+  event in yyyy-mm-dd format \item Estimate - Yes or blank;
+  Yes if the record has not been verified. }
+}
+\author{
+  Gopi Goteti
+}
+\references{
+  USA record point precipitation measurements,
+  \url{http://www.nws.noaa.gov/oh/hdsc/record_precip/record_precip_us.html},
+  extracted May 18 2014.
+}
+\keyword{datasets}
+

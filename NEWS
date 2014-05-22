@@ -1,0 +1,8 @@
+Version 0.1, May 2014
+-----------
+
+* `extract_freq` regional selection criterion does not include US territories such as Puerto Rico and Guam. Future updates would incorporate these regions. 
+
+*  `rainfreq` currently does not extract the upper and lower limits of the confidence intervals on frequency estimates. Future updates would incorporate this data.
+ 
+*  Data for Texas and Pacific Northwest is currently not available from NWS. When such data becomes available, `rainfreq` would be updated accordingly.
