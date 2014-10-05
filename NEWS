@@ -1,3 +1,14 @@
+Version 0.2, Oct 2014
+-----------
+
+* NWS' website (ftp site) sometimes has connectivity issues. Website is checked for a response, and function proceeds only if it does.
+
+* Package vignette changed to a Rmarkdown document.
+
+* License changed from GPL to MIT
+
+* The three tasks mentioned in v0.1 NEWS still remain to be addressed.
+
 Version 0.1, May 2014
 -----------
 

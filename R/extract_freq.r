@@ -98,7 +98,16 @@ extract_freq <- function(region_name = "se",
     
     # NWS ftp site
     data_source <- "ftp://hdsc.nws.noaa.gov/pub/hdsc/data/"
+    
+    # check whether the site exists/responds
+    if (!url.exists(data_source)) {
+      stop(paste("NWS website", data_source, "is not responding, please try later!"))
+    }
     url_name <- paste0(data_source, region_name, "/", file_dump)
+    if (!url.exists(url_name)) {
+      stop(paste("NWS website", url_name, "is not responding or does not exist, 
+                 please check and/or try later!"))
+    }
     
     # download using RCurl
     message("downloading data. might take a few moments ...")

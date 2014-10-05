@@ -1,0 +1,115 @@
+<!--
+%\VignetteEngine{knitr}
+%\VignetteIndexEntry{Package Demo: rainfreq}
+-->
+
+```{r, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(
+  comment = "#>",
+  error = FALSE,
+  tidy = FALSE)
+```
+
+# Introduction to *rainfreq*
+
+This vignette first provides an overview of the rainfall frequency estimates from the National Weather Service ([NWS][url1_ref]) followed by some examples on how to obtain and plot the data using the *rainfreq* package.
+
+Rainfall frequency estimates for the USA from the NOAA National Weather Service's (NWS) division of Hydrometeorological Design Studies Center (HDSC) are often used in the the design of dams and other hydraulic structures and also in environmental planning and management. Data from NOAA NWS is available in various formats, including a user interface to extract the desired information. However, there is a lot of data and it is available in raw format as a large number of 1-km resolution GIS files. 
+
+The *rainfreq* package provides functionality to access 1-km rainfall frequency estimates in GIS format provided by the [NWS' PF Data Server][url2_ref]. The goal of the *rainfreq* package is to make the retrieval and analysis of this GIS data easier. Moreover, *rainfreq* also comes with NWS datasets on [record point rainfall measurements][url3_ref].
+
+
+# Using *rainfreq*
+
+After installing the package, load the package along with *RCurl* (for data extraction) and *SDMTools*, *raster* and *maps* for GIS analysis and graphics.
+
+```{r, message = FALSE}
+require(rainfreq)
+require(RCurl)
+require(SDMTools)
+require(raster)
+require(maps)
+```
+
+The main function provided by *rainfreq* is `extract_freq`. This could be used to extract data for any desired region. The default invocation of `extract_freq` of gets the 100-year 24-hour rainfall for the Southeast USA.
+
+```{r}
+x_se <- extract_freq()
+print(x_se)
+```
+
+In order to obtain the 1000-year 48-hour rainfall for the Midwest, change `region_name`, `storm_RP` and `storm_duration` arguments accordingly.
+
+```{r}
+x_mw <- extract_freq(region_name = "mw", storm_RP = 1000, storm_duration = "48h")
+print(x_mw)
+```
+
+Similarly, in order to obtain the 10-yr 6-hour rainfall for Hawaii, change the `region_name`, `storm_RP` and `storm_duration` arguments accordingly.
+
+```{r}
+x_hi <- extract_freq(region_name = "hi", storm_RP = 10, storm_duration = "6h")
+print(x_hi)
+```
+
+One could also obtain the record storm measurements provided by NWS using *rainfreq*. 
+
+```{r}
+data(rain_max_usa)
+head(rain_max_usa)
+data(rain_max_world)
+head(rain_max_world)
+```
+
+# Graphics
+
+The output from `extract_freq` is designed to be consistent with the `RasterLayer` class of the *SDMTools* package. This consistency enables the use of GIS functions for analysis and graphics provided by *SDMTools* and related packages.
+
+Before plotting the data, convert the data to appropriate units. The original units are in 1000th inches, so multiply by 0.001 to get rainfall in inches. 
+
+```{r}
+x_se <- x_se * 0.001
+x_mw <- x_mw * 0.001
+x_hi <- x_hi * 0.001
+```
+
+Here are the three rainfall estimates obtained so far. State boundaries are added for spatial reference.
+
+Rainfall amounts for selected frequency and duration periods - Souhteast USA.
+```{r}
+# southeast
+plot(x_se, breaks = c(6, 9, 12, 15, 18), 
+     col = c("red", "yellow", "green", "blue"), 
+     main = "100-year 24-hour Rainfall for Southeast USA (inches)")
+map('state', region = c('florida', 'arkansas', 'louisiana', 'mississippi', 
+                        'alabama', 'georgia'), add = TRUE)
+```
+
+Rainfall amounts for selected frequency and duration periods - Midwest USA.
+```{r}
+# midwest
+plot(x_mw, breaks = c(2, 5, 10, 15, 20), 
+     col = c("red", "yellow", "green", "blue"),
+     main = "1000-year 48-hour Rainfall for Midwest USA (inches)")
+map('state', region = c('colorado', 'north dakota', 'south dakota', 'nebraska', 
+                        'oklahoma', 'minnesota', 'iowa', 'missouri', 
+                        'wisconsin', 'michigan'), add = TRUE)
+```
+
+Rainfall amounts for selected frequency and duration periods - Hawaii.
+```{r}
+# hawaii
+plot(x_hi, breaks = c(1, 3, 6, 9, 12), 
+     col = c("red", "yellow", "green", "blue"),
+     main = "10-year 6-hour Rainfall for Hawaii (inches)")
+```
+
+
+# Future Work
+
+The `extract_freq` function's regional selection criterion does not include US territories such as Puerto Rico and Guam. Future updates would incorporate these regions. Also, functionality could be added to extract the upper and lower limits of the confidence intervals on frequency estimates. Currently, data for Texas and Pacific Northwest is not available from NWS; when such data becomes available, *rainfreq* would be updated accordingly.
+
+
+[url1_ref]: http://hdsc.nws.noaa.gov/hdsc/pfds/index.html "NWS"
+[url2_ref]: http://hdsc.nws.noaa.gov/hdsc/pfds/pfds_gis.html "NWS GIS Data"
+[url3_ref]: http://www.nws.noaa.gov/oh/hdsc/record_precip/record_precip.html "NWS Point Records"

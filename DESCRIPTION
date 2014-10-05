@@ -13,16 +13,16 @@ Description: Estimates of rainfall at desired frequency (e.g., 1% annual
     and analyze the 1-km GIS files provided by NWS' PF Data Server for
     the entire USA. This package also comes with datasets on record point
     rainfall measurements provided by NWS-HDSC.
-Version: 0.1
+Version: 0.2
 Author: Gopi Goteti <my.ration.shop@gmail.com>
 Maintainer: Gopi Goteti <my.ration.shop@gmail.com>
 Depends: R (>= 3.0.2)
 Imports: RCurl, SDMTools
-Suggests: raster, maps
-License: GPL (>= 2)
+VignetteBuilder: knitr
+Suggests: knitr, raster, maps
+License: MIT + file LICENSE
 LazyData: true
-Collate: 'data.r' 'extract_freq.r'
-Packaged: 2014-05-22 21:42:56 UTC; GGoteti
+Packaged: 2014-10-05 04:26:46 UTC; gotetigx
 NeedsCompilation: no
 Repository: CRAN
-Date/Publication: 2014-05-23 07:24:57
+Date/Publication: 2014-10-05 07:43:50
