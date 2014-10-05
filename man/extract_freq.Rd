@@ -33,7 +33,8 @@ desired. default is FALSE. if set to TRUE a valid file path is required.}
 flag_read_only is TRUE it defaults to the working directory}
 }
 \value{
-RasterLayer, if flag_down_only is set to FALSE, NULL otherwise
+RasterLayer, if flag_down_only is set to FALSE, NULL otherwise; if
+the NWS website is not working a value of 10 is returned
 }
 \description{
 Extract rainfall frequency estimates for desired region of the USA

@@ -107,8 +107,9 @@ plot(x_hi, breaks = c(1, 3, 6, 9, 12),
 
 # Future Work
 
-The `extract_freq` function's regional selection criterion does not include US territories such as Puerto Rico and Guam. Future updates would incorporate these regions. Also, functionality could be added to extract the upper and lower limits of the confidence intervals on frequency estimates. Currently, data for Texas and Pacific Northwest is not available from NWS; when such data becomes available, *rainfreq* would be updated accordingly.
-
+* `extract_freq` function's regional selection criterion does not include US territories such as Puerto Rico and Guam. Future updates would incorporate these regions. 
+* Currently, data for Texas and Pacific Northwest is not available from the NWS. When such data becomes available, the package would be updated accordingly.
+* Functionality could be added to extract the upper and lower limits of the confidence intervals on frequency estimates. 
 
 [url1_ref]: http://hdsc.nws.noaa.gov/hdsc/pfds/index.html "NWS"
 [url2_ref]: http://hdsc.nws.noaa.gov/hdsc/pfds/pfds_gis.html "NWS GIS Data"

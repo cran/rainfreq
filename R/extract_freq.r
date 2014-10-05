@@ -18,7 +18,8 @@
 #' @param nws_data_path location of downloaded nws zip files. when 
 #' flag_read_only is TRUE it defaults to the working directory
 #' 
-#' @return RasterLayer, if flag_down_only is set to FALSE, NULL otherwise
+#' @return RasterLayer, if flag_down_only is set to FALSE, NULL otherwise; if 
+#' the NWS website is not working a value of 10 is returned
 #' 
 #' @author Gopi Goteti
 #' 
@@ -101,12 +102,14 @@ extract_freq <- function(region_name = "se",
     
     # check whether the site exists/responds
     if (!url.exists(data_source)) {
-      stop(paste("NWS website", data_source, "is not responding, please try later!"))
+      message(paste("NWS website", data_source, "is not responding, please try later!"))
+      return (10)
     }
     url_name <- paste0(data_source, region_name, "/", file_dump)
     if (!url.exists(url_name)) {
-      stop(paste("NWS website", url_name, "is not responding or does not exist, 
+      message(paste("NWS website", url_name, "is not responding or does not exist, 
                  please check and/or try later!"))
+      return (10)
     }
     
     # download using RCurl

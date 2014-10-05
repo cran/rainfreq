@@ -1,3 +1,8 @@
+Version 0.3, Oct 2014
+-----------
+
+* NWS' website (ftp site) sometimes has connectivity issues. If the website is not responding a message is displayed and a value of 10 is returned.
+
 Version 0.2, Oct 2014
 -----------
 
